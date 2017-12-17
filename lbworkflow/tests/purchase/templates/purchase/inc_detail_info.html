@@ -1,0 +1,38 @@
+{% include "lbworkflow/inc_wf_status.html" %}
+<table class="table table-bordered tb-detail no-margin">
+  
+  <tr>
+    <th>Title</th>
+    <td>{{ object.title }}</td>
+    <th>Reason</th>
+    <td>{{ object.reason }}</td>
+  </tr>
+  
+  {% comment %}
+  <tr>
+    <th>Reason</th>
+    <td colspan="3">
+      {{ object.reason|linebreaks }}
+    </td>
+  </tr>
+  {% endcomment %}
+</table>
+
+<br>
+
+<table class="table table-bordered table-striped no-margin print">
+  <tr>
+    <th>purchase</th>
+    <th>Name</th>
+    <th>Qty</th>
+    <th>Note</th>
+  </tr>
+  {% for o in object.item_set.all %}
+  <tr>
+    <td>{{ o.purchase }}</td>
+    <td>{{ o.name }}</td>
+    <td>{{ o.qty }}</td>
+    <td>{{ o.note }}</td>
+  </tr>
+  {% endfor %}
+</table>

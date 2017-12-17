@@ -1,0 +1,26 @@
+{% include "lbworkflow/inc_wf_status.html" %}
+<table class="table table-bordered tb-detail no-margin">
+  
+  <tr>
+    <th>Title</th>
+    <td>{{ object.title }}</td>
+    <th>Summary</th>
+    <td>{{ object.summary }}</td>
+  </tr>
+  
+  <tr>
+    <th>Content</th>
+    <td>{{ object.content }}</td>
+    <th></th>
+    <td>{{ object. }}</td>
+  </tr>
+  
+  {% comment %}
+  <tr>
+    <th>Reason</th>
+    <td colspan="3">
+      {{ object.reason|linebreaks }}
+    </td>
+  </tr>
+  {% endcomment %}
+</table>
