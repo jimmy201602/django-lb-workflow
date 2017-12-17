@@ -37,3 +37,5 @@ MEDIA_URL = MEDIA_URL_
 LBWF_APPS.update({
     'issue': 'lbworkflow.tests.issue',
 })
+
+TEMPLATE_DEBUG = True

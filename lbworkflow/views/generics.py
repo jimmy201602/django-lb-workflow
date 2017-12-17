@@ -104,7 +104,7 @@ class UpdateView(WorkflowTemplateResponseMixin, FormsView):
         return reverse('wf_detail', args=(self.object.pinstance.pk, ))
 
     def get_context_data(self, **kwargs):
-        kwargs = super().get_context_data(**kwargs)
+        kwargs = super(UpdateView,self).get_context_data(**kwargs)
         kwargs.update(user_wf_info_as_dict(self.object, self.request.user))
         return kwargs
 
