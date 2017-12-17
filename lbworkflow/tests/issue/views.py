@@ -1,6 +1,7 @@
 from lbworkflow.views.generics import CreateView
 from lbworkflow.views.generics import UpdateView
 from lbworkflow.views.generics import WFListView
+from lbworkflow.views.mixin import BSFormSetMixin
 
 from .forms import IssueForm
 
