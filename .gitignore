@@ -1,0 +1,12 @@
+*.pyc
+build/
+dist/
+django_lb_workflow.egg-info/
+env/
+lbworkflow/bower_components/
+lbworkflow/db.sqlite3
+lbworkflow/migrations/0003_auto_20171217_0632.py
+lbworkflow/tests/issue/migrations/
+lbworkflow/tests/leave/migrations/
+lbworkflow/tests/purchase/migrations/
+
