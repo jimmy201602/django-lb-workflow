@@ -95,7 +95,7 @@ class FormsMixin(ContextMixin):
 class ModelFormsMixin(object):
 
     def get_form_kwargs(self, form_class_key, form_class):
-        kwargs = super().get_form_kwargs(form_class_key, form_class)
+        kwargs = super(ModelFormsMixin,self).get_form_kwargs(form_class_key, form_class)
         # not (ModelForm or ModelFormSet)
         formset_form_class = getattr(form_class, 'form', str)
         if not issubclass(form_class, ModelForm) \
@@ -122,7 +122,7 @@ def is_formset(form):
 class FormSetMixin(object):
 
     def get_context_data(self, **kwargs):
-        kwargs = super().get_context_data(**kwargs)
+        kwargs = super(FormSetMixin,self).get_context_data(**kwargs)
         formset_list = []
         for form in self.forms.values():
             if is_formset(form):
@@ -134,7 +134,7 @@ class FormSetMixin(object):
         formset.title = "Items"
 
     def after_create_form(self, form_class_key, form):
-        super().after_create_form(form_class_key, form)
+        super(FormSetMixin,self).after_create_form(form_class_key, form)
         if is_formset(form):
             self.after_create_formset(form_class_key, form)
         return form
@@ -143,7 +143,7 @@ class FormSetMixin(object):
         return {}
 
     def get_form_kwargs(self, form_class_key, form_class):
-        kwargs = super().get_form_kwargs(form_class_key, form_class)
+        kwargs = super(FormSetMixin,self).get_form_kwargs(form_class_key, form_class)
         if is_formset(form_class):
             return kwargs
         ext_kwargs = self.get_formset_kwargs(form_class_key, form_class)
@@ -186,7 +186,7 @@ class BSFormSetMixin(object):
     Crispy & Bootstrap for formset
     """
     def after_create_formset(self, form_class_key, formset):
-        super().after_create_formset(form_class_key, formset)
+        super(BSFormSetMixin,self).after_create_formset(form_class_key, formset)
         helper = FormHelper()
         helper.template = 'lbadminlte/bootstrap3/table_inline_formset.html'
         formset.helper = helper

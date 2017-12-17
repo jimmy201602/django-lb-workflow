@@ -73,7 +73,7 @@ class CreateView(WorkflowTemplateResponseMixin, FormsView):
         return reverse('wf_detail', args=(self.object.pinstance.pk, ))
 
     def get_context_data(self, **kwargs):
-        kwargs = super().get_context_data(**kwargs)
+        kwargs = super(CreateView,self).get_context_data(**kwargs)
         kwargs['wf_code'] = self.wf_code
         kwargs['process'] = get_object_or_404(Process, code=self.wf_code)
         return kwargs
@@ -129,7 +129,7 @@ class BaseListView(ExcelResponseMixin, MultipleObjectMixin, View):
     ordering = '-pk'
     base_template_name = 'list.html'
 
-    def dispatch(self, request, *args, wf_code=None, **kwargs):
+    def dispatch(self, request,wf_code=None, *args, **kwargs):
         self.request = request
         self.wf_code = wf_code
         return super(BaseListView, self).dispatch(request, *args, **kwargs)
