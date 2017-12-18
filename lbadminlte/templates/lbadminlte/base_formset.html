@@ -1,0 +1,103 @@
+{% extends "base_form.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load compress %}
+
+{% block body_class %}skin-blue sidebar-collapse{% endblock %}
+
+{% block form_class %}{% endblock %}
+
+{% block right_side_content %}
+  {% block right_side_content_top %}
+  {% endblock %}
+
+  {% block right_side_content_form %}
+  <div class="box">
+    <div class="box-header"> </div>
+    <div class="box-body form-horizontal m-form">
+      {% crispy form %}
+    </div>
+  </div>
+ {% endblock %}
+
+  {% block before_fomset_list %}
+  {% endblock %}
+
+  {% block fomset_list %}
+  <div class="formset-list">
+    {% for formset in formset_list %}
+      {% include "lbadminlte/inc_formset.html" %}
+    {% endfor %}
+  </div>
+  {% endblock %}
+
+  {% block after_fomset_list %}
+  {% endblock %}
+
+  <div class="box">
+    <div class="box-body">
+      {% block fs_form_bottom_ext_from %}
+      {% endblock %}
+      <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+          {% block form_bottom_ext %}
+          {% endblock %}
+          {% block form_act_btns %}
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-default goback">Cancel</button>
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block footer_ext %}
+  {{ block.super}}
+
+  {% if form %}
+  <script type="text/javascript">
+    $(function(){
+      {% for f in form.one_row_fields %}
+        fmtOneRowField('{{ f }}');
+      {% endfor %}
+    })
+  </script>
+  {% endif %}
+
+  {% compress js %}
+  <script src="{% static 'js/django.formset.js' %}" type="text/javascript"></script>
+  {% endcompress %}
+
+  {% block formset_js %}
+    <script type="text/javascript">
+      $(function(){
+        function initRow(row) {
+          row.removeClass('checkbox')
+          $('td', row).removeClass('checkbox');
+        }
+        $('.formset-list .fs-btn-add').click(function(){
+          var t = $(this);
+          var box = t.closest('.box');
+          $('.add-row', box).click();
+        });
+        {% for formset in formset_list %}
+          $('.formset-list div.box.{{ formset.prefix }} table.fs tbody tr').formset({
+              prefix: '{{ formset.prefix }}',
+              formCssClass: '{{ formset.prefix }}-dynamic-form',
+              addCssClass: 'add-row btn btn-default',
+              deleteCssClass: 'delete-row',
+              formTemplate: '#{{ formset.prefix }}-empty',
+              added: function(row){
+                initRow(row);
+              },
+              inited: function(row){
+                initRow(row);
+              }
+          });
+        {% endfor %}
+      });
+    </script>
+  {% endblock %}
+{% endblock %}
