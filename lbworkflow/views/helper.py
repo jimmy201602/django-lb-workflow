@@ -16,8 +16,7 @@ def import_wf_views(wf_code, view_module_name='views'):
 def add_processed_message(request, process_instance, act_descn='Processed'):
     messages.info(
         request,
-        'Process "%s" has been %s. Current status："%s" Current user："%s"' %
-        (
+        'Process "{0}" has been {1}. Current status："{2}" Current user："{3}"'.format(
             process_instance.no, act_descn, process_instance.cur_node.name,
             process_instance.get_operators_display()
         )
