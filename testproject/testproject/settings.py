@@ -22,7 +22,7 @@ STRONGHOLD_PUBLIC_URLS = [
 
 MIDDLEWARE += [
     'impersonate.middleware.ImpersonateMiddleware',
-    'testproject.middleware.LoginRequiredStrongholdMiddleware',
+    'stronghold.middleware.LoginRequiredMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
